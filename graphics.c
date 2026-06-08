@@ -1,6 +1,7 @@
 #include "graphics.h"
 #include <math.h>
-#include<stdlib.h>
+#include <stdlib.h>
+
 
 // Draw a line using Bresenham's algorithm
 void draw_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
