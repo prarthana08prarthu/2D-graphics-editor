@@ -92,10 +92,12 @@ void modify_object(int index) {
 
 // Bresenham's line algorithm - draws a line between two poin
 
+// Put this near the top of graphics.c
 static inline int abs_int(int v) {
     return (v < 0) ? -v : v;
 }
 
+// Bresenham's line algorithm
 void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     int dx = abs_int(x2 - x1);
     int dy = abs_int(y2 - y1);
