@@ -1,6 +1,6 @@
 #include "graphics.h"
-#include <math.h>
 #include <stdlib.h>
+#include <math.h>
 
 
 // Draw a line using Bresenham's algorithm
