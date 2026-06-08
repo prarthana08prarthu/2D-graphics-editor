@@ -1,6 +1,7 @@
+#include <stdlib.h>   // labs()
+#include <stdio.h>    // printf, scanf
+#include <math.h>     // other math functions
 #include "graphics.h"
-#include <stdlib.h>
-#include <math.h>
 
 
 // Draw a line using Bresenham's algorithm
