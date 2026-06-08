@@ -100,7 +100,13 @@ static inline int abs_int(int v) {
 // Bresenham's line algorithm
 void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     int dx = (x2 > x1 ? x2 - x1 : x1 - x2);
+<<<<<<< HEAD
     int dy = (y2 > y1 ? y2 - y1 : y1 - y2);
+=======
+
+    int dy = (y2 > y1 ? y2 - y1 : y1 - y2);
+
+>>>>>>> d3ef2ba (Fix Bresenham line abs warning)
     int sx = (x1 < x2) ? 1 : -1;
     int sy = (y1 < y2) ? 1 : -1;
     int err = dx - dy;
