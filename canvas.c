@@ -2,6 +2,41 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define ROWS 50
+#define COLS 50
+#include <stdlib.h> // for abs()
+
+void draw_line(int x1, int y1, int x2, int y2) {
+    int dx = abs(x2 - x1), dy = abs(y2 - y1);
+    int sx = (x1 < x2) ? 1 : -1;
+    int sy = (y1 < y2) ? 1 : -1;
+    int err = dx - dy;
+
+    while (1) {
+        canvas[y1][x1] = '*';
+        if (x1 == x2 && y1 == y2) break;
+        int e2 = 2 * err;
+        if (e2 > -dy) { err -= dy; x1 += sx; }
+        if (e2 < dx) { err += dx; y1 += sy; }
+    }
+}
+
+char canvas[ROWS][COLS];
+
+void init_canvas() {
+    for (int i = 0; i < ROWS; i++)
+        for (int j = 0; j < COLS; j++)
+            canvas[i][j] = ' ';
+}
+
+void display_canvas() {
+    for (int i = 0; i < ROWS; i++) {
+        for (int j = 0; j < COLS; j++)
+            printf("%c", canvas[i][j]);
+        printf("\n");
+    }
+}
+
 
 // Create a new canvas
 Canvas* canvas_create(int width, int height) {
