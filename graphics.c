@@ -91,9 +91,14 @@ void modify_object(int index) {
 
 
 // Bresenham's line algorithm - draws a line between two points
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include "graphics.h"
+
 void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
-    int dx = (int)labs(long)(x2 - x1);
-    int dy =(int) labs(long)(y2 - y1);
+    int dx = abs(x2 - x1);   // abs() works for int
+    int dy = abs(y2 - y1);
     int sx = (x1 < x2) ? 1 : -1;
     int sy = (y1 < y2) ? 1 : -1;
     int err = dx - dy;
