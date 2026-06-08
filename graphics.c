@@ -6,6 +6,19 @@
 void draw_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     bresenham_line(canvas, x1, y1, x2, y2);
 }
+void delete_object(int index) {
+    if (index < 0 || index >= object_count) return;
+    for (int i = index; i < object_count - 1; i++) {
+        objects[i] = objects[i + 1];
+    }
+    object_count--;
+
+    init_canvas();
+    for (int i = 0; i < object_count; i++) {
+        // call draw function depending on objects[i].type
+    }
+}
+
 
 // Bresenham's line algorithm - draws a line between two points
 void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
