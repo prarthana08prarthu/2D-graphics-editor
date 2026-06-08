@@ -21,7 +21,6 @@ void delete_object(int index) {
 void modify_object(int index) {
     if (index < 0 || index >= object_count) return;
 
-    // Ask user for new parameters depending on type
     if (objects[index].type == 'L') {
         int x1, y1, x2, y2;
         printf("Enter new line coordinates (x1 y1 x2 y2): ");
@@ -41,7 +40,7 @@ void modify_object(int index) {
     }
     // Add similar blocks for Rectangle and Triangle
 
-    // After modification, clear and redraw
+    // Clear and redraw everything
     init_canvas();
     for (int i = 0; i < object_count; i++) {
         if (objects[i].type == 'L') {
