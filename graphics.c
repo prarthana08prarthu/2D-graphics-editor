@@ -18,6 +18,44 @@ void delete_object(int index) {
         // call draw function depending on objects[i].type
     }
 }
+void modify_object(int index) {
+    if (index < 0 || index >= object_count) return;
+
+    // Ask user for new parameters depending on type
+    if (objects[index].type == 'L') {
+        int x1, y1, x2, y2;
+        printf("Enter new line coordinates (x1 y1 x2 y2): ");
+        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+        objects[index].params[0] = x1;
+        objects[index].params[1] = y1;
+        objects[index].params[2] = x2;
+        objects[index].params[3] = y2;
+    }
+    else if (objects[index].type == 'C') {
+        int x, y, r;
+        printf("Enter new circle center (x y) and radius: ");
+        scanf("%d %d %d", &x, &y, &r);
+        objects[index].params[0] = x;
+        objects[index].params[1] = y;
+        objects[index].params[2] = r;
+    }
+    // Add similar blocks for Rectangle and Triangle
+
+    // After modification, clear and redraw
+    init_canvas();
+    for (int i = 0; i < object_count; i++) {
+        if (objects[i].type == 'L') {
+            draw_line(objects[i].params[0], objects[i].params[1],
+                      objects[i].params[2], objects[i].params[3]);
+        }
+        else if (objects[i].type == 'C') {
+            draw_circle(objects[i].params[0], objects[i].params[1],
+                        objects[i].params[2]);
+        }
+        // Add rectangle/triangle redraws here
+    }
+}
+
 
 
 // Bresenham's line algorithm - draws a line between two points
