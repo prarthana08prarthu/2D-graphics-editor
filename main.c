@@ -199,6 +199,15 @@ int main() {
                 printf("Goodbye! 👋\n\n");
                 canvas_free(canvas);
                 exit(0);
+        
+            case 10: {
+                int index;
+                printf("Enter object number to modify (0 to %d): ", object_count - 1);
+                scanf("%d", &index);
+                modify_object(index);
+                break;
+            }
+
 
             default:
                 printf("\n✗ Invalid choice! Please try again.\n");
