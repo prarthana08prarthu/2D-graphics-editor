@@ -114,6 +114,7 @@ void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     }
 }
 
+
 // Draw a circle using Midpoint Circle algorithm
 void draw_circle(Canvas* canvas, int cx, int cy, int radius) {
     midpoint_circle(canvas, cx, cy, radius);
