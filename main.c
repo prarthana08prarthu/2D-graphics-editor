@@ -122,12 +122,14 @@ int main() {
                        x1, y1, x2, y2, x3, y3);
                 break;
 
-            case 5: // Display Canvas
-                canvas_display(canvas);
-                printf("\nPress Enter to continue...");
-                getchar();
-                getchar();
+            case 5: {
+                int index;
+                printf("Enter object number to delete (0 to %d): ", object_count - 1);
+                scanf("%d", &index);
+                delete_object(index);
                 break;
+            }
+
 
             case 6: // List Objects
                 canvas_list_objects(canvas);
