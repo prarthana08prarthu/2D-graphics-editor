@@ -20,7 +20,6 @@ void delete_object(int index) {
 }
 void modify_object(int index) {
     if (index < 0 || index >= object_count) return;
-
     if (objects[index].type == 'L') {
         int x1, y1, x2, y2;
         printf("Enter new line coordinates (x1 y1 x2 y2): ");
@@ -30,14 +29,8 @@ void modify_object(int index) {
         objects[index].params[2] = x2;
         objects[index].params[3] = y2;
     }
-    else if (objects[index].type == 'C') {
-        int x, y, r;
-        printf("Enter new circle center (x y) and radius: ");
-        scanf("%d %d %d", &x, &y, &r);
-        objects[index].params[0] = x;
-        objects[index].params[1] = y;
-        objects[index].params[2] = r;
-    }
+    // Add similar blocks for Circle, Rectangle, Triangle
+
     // Add similar blocks for Rectangle and Triangle
 
     // Clear and redraw everything
