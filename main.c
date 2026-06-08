@@ -166,13 +166,14 @@ int main() {
         // Add rectangle/triangle redraws here
     }
 }
-        case 6: {
-            int index;
-            printf("Enter object number to modify (0 to %d): ", object_count - 1);
-            scanf("%d", &index);
-            modify_object(index);
-            break;
-        }
+       case 6: {
+           int index;
+           printf("Enter object number to modify (0 to %d): ", object_count - 1);
+           scanf("%d", &index);
+           modify_object(index);
+           break;
+       }
+
 
 
 
