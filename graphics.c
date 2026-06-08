@@ -21,6 +21,7 @@ void delete_object(int index) {
 }
 void modify_object(int index) {
     if (index < 0 || index >= object_count) return;
+
     if (objects[index].type == 'L') {
         int x1, y1, x2, y2;
         printf("Enter new line coordinates (x1 y1 x2 y2): ");
@@ -30,24 +31,59 @@ void modify_object(int index) {
         objects[index].params[2] = x2;
         objects[index].params[3] = y2;
     }
-    // Add similar blocks for Circle, Rectangle, Triangle
-
-    // Add similar blocks for Rectangle and Triangle
+    else if (objects[index].type == 'C') {
+        int cx, cy, r;
+        printf("Enter new circle center and radius (cx cy r): ");
+        scanf("%d %d %d", &cx, &cy, &r);
+        objects[index].params[0] = cx;
+        objects[index].params[1] = cy;
+        objects[index].params[2] = r;
+    }
+    else if (objects[index].type == 'R') {
+        int x, y, w, h;
+        printf("Enter new rectangle (x y width height): ");
+        scanf("%d %d %d %d", &x, &y, &w, &h);
+        objects[index].params[0] = x;
+        objects[index].params[1] = y;
+        objects[index].params[2] = w;
+        objects[index].params[3] = h;
+    }
+    else if (objects[index].type == 'T') {
+        int x1, y1, x2, y2, x3, y3;
+        printf("Enter new triangle coordinates (x1 y1 x2 y2 x3 y3): ");
+        scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
+        objects[index].params[0] = x1;
+        objects[index].params[1] = y1;
+        objects[index].params[2] = x2;
+        objects[index].params[3] = y2;
+        objects[index].params[4] = x3;
+        objects[index].params[5] = y3;
+    }
 
     // Clear and redraw everything
     init_canvas();
     for (int i = 0; i < object_count; i++) {
         if (objects[i].type == 'L') {
-            draw_line(objects[i].params[0], objects[i].params[1],
+            draw_line(canvas, objects[i].params[0], objects[i].params[1],
                       objects[i].params[2], objects[i].params[3]);
         }
         else if (objects[i].type == 'C') {
-            draw_circle(objects[i].params[0], objects[i].params[1],
+            draw_circle(canvas, objects[i].params[0], objects[i].params[1],
                         objects[i].params[2]);
         }
-        // Add rectangle/triangle redraws here
+        else if (objects[i].type == 'R') {
+            draw_rectangle(canvas, objects[i].params[0], objects[i].params[1],
+                           objects[i].params[2], objects[i].params[3]);
+        }
+        else if (objects[i].type == 'T') {
+            draw_triangle(canvas, objects[i].params[0], objects[i].params[1],
+                          objects[i].params[2], objects[i].params[3],
+                          objects[i].params[4], objects[i].params[5]);
+        }
     }
 }
+
+
 
 
 
