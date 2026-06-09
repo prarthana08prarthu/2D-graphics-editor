@@ -122,63 +122,15 @@ int main() {
                        x1, y1, x2, y2, x3, y3);
                 break;
 
-            case 5: {
-                int index;
-                printf("Enter object number to delete (0 to %d): ", object_count - 1);
-                scanf("%d", &index);
-                delete_object(index);
+            case 5: // Display Canvas
+                printf("\n--- Canvas Display ---\n");
+                canvas_display(canvas);
                 break;
-            }
-            void modify_object(int index) {
-    if (index < 0 || index >= object_count) return;
 
-    // Ask user for new parameters depending on type
-    if (objects[index].type == 'L') {
-        int x1, y1, x2, y2;
-        printf("Enter new line coordinates (x1 y1 x2 y2): ");
-        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
-        objects[index].params[0] = x1;
-        objects[index].params[1] = y1;
-        objects[index].params[2] = x2;
-        objects[index].params[3] = y2;
-    }
-    else if (objects[index].type == 'C') {
-        int x, y, r;
-        printf("Enter new circle center (x y) and radius: ");
-        scanf("%d %d %d", &x, &y, &r);
-        objects[index].params[0] = x;
-        objects[index].params[1] = y;
-        objects[index].params[2] = r;
-    }
-    // Add similar blocks for Rectangle and Triangle
-
-    // After modification, clear and redraw
-    init_canvas();
-    for (int i = 0; i < object_count; i++) {
-        if (objects[i].type == 'L') {
-            draw_line(objects[i].params[0], objects[i].params[1],
-                      objects[i].params[2], objects[i].params[3]);
-        }
-        else if (objects[i].type == 'C') {
-            draw_circle(objects[i].params[0], objects[i].params[1],
-                        objects[i].params[2]);
-        }
-        // Add rectangle/triangle redraws here
-    }
-}
-       case 6: {
-           int index;
-           printf("Enter object number to modify (0 to %d): ", object_count - 1);
-           scanf("%d", &index);
-           modify_object(index);
-           break;
-       }
-
-
-
-
-
-           
+            case 6: // List Objects
+                printf("\n--- Objects Listing ---\n");
+                canvas_list_objects(canvas);
+                break;
 
             case 7: // Delete Object
                 printf("\n--- Delete Object ---\n");
@@ -199,15 +151,6 @@ int main() {
                 printf("Goodbye! 👋\n\n");
                 canvas_free(canvas);
                 exit(0);
-        
-            case 10: {
-                int index;
-                printf("Enter object number to modify (0 to %d): ", object_count - 1);
-                scanf("%d", &index);
-                modify_object(index);
-                break;
-            }
-
 
             default:
                 printf("\n✗ Invalid choice! Please try again.\n");
