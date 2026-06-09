@@ -3,110 +3,19 @@
 #include <math.h>
 #include "graphics.h"
 
-long labs(long);  // explicit declaration
-
-
 // Draw a line using Bresenham's algorithm
 void draw_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     bresenham_line(canvas, x1, y1, x2, y2);
 }
-void delete_object(int index) {
-    if (index < 0 || index >= object_count) return;
-    for (int i = index; i < object_count - 1; i++) {
-        objects[i] = objects[i + 1];
-    }
-    object_count--;
 
-    init_canvas();
-    for (int i = 0; i < object_count; i++) {
-        // call draw function depending on objects[i].type
-    }
-}
-void modify_object(int index) {
-    if (index < 0 || index >= object_count) return;
-
-    if (objects[index].type == 'L') {
-        int x1, y1, x2, y2;
-        printf("Enter new line coordinates (x1 y1 x2 y2): ");
-        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
-        objects[index].params[0] = x1;
-        objects[index].params[1] = y1;
-        objects[index].params[2] = x2;
-        objects[index].params[3] = y2;
-    }
-    else if (objects[index].type == 'C') {
-        int cx, cy, r;
-        printf("Enter new circle center and radius (cx cy r): ");
-        scanf("%d %d %d", &cx, &cy, &r);
-        objects[index].params[0] = cx;
-        objects[index].params[1] = cy;
-        objects[index].params[2] = r;
-    }
-    else if (objects[index].type == 'R') {
-        int x, y, w, h;
-        printf("Enter new rectangle (x y width height): ");
-        scanf("%d %d %d %d", &x, &y, &w, &h);
-        objects[index].params[0] = x;
-        objects[index].params[1] = y;
-        objects[index].params[2] = w;
-        objects[index].params[3] = h;
-    }
-    else if (objects[index].type == 'T') {
-        int x1, y1, x2, y2, x3, y3;
-        printf("Enter new triangle coordinates (x1 y1 x2 y2 x3 y3): ");
-        scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
-        objects[index].params[0] = x1;
-        objects[index].params[1] = y1;
-        objects[index].params[2] = x2;
-        objects[index].params[3] = y2;
-        objects[index].params[4] = x3;
-        objects[index].params[5] = y3;
-    }
-
-    // Clear and redraw everything
-    init_canvas();
-    for (int i = 0; i < object_count; i++) {
-        if (objects[i].type == 'L') {
-            draw_line(canvas, objects[i].params[0], objects[i].params[1],
-                      objects[i].params[2], objects[i].params[3]);
-        }
-        else if (objects[i].type == 'C') {
-            draw_circle(canvas, objects[i].params[0], objects[i].params[1],
-                        objects[i].params[2]);
-        }
-        else if (objects[i].type == 'R') {
-            draw_rectangle(canvas, objects[i].params[0], objects[i].params[1],
-                           objects[i].params[2], objects[i].params[3]);
-        }
-        else if (objects[i].type == 'T') {
-            draw_triangle(canvas, objects[i].params[0], objects[i].params[1],
-                          objects[i].params[2], objects[i].params[3],
-                          objects[i].params[4], objects[i].params[5]);
-        }
-    }
-}
-
-
-
-
-
-// Bresenham's line algorithm - draws a line between two poin
-
-// Put this near the top of graphics.c
+// Bresenham's line algorithm - draws a line between two points
 static inline int abs_int(int v) {
     return (v < 0) ? -v : v;
 }
 
-// Bresenham's line algorithm
 void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
     int dx = (x2 > x1 ? x2 - x1 : x1 - x2);
-<<<<<<< HEAD
     int dy = (y2 > y1 ? y2 - y1 : y1 - y2);
-=======
-
-    int dy = (y2 > y1 ? y2 - y1 : y1 - y2);
-
->>>>>>> d3ef2ba (Fix Bresenham line abs warning)
     int sx = (x1 < x2) ? 1 : -1;
     int sy = (y1 < y2) ? 1 : -1;
     int err = dx - dy;
@@ -129,9 +38,6 @@ void bresenham_line(Canvas* canvas, int x1, int y1, int x2, int y2) {
         }
     }
 }
-
-
-
 
 // Draw a circle using Midpoint Circle algorithm
 void draw_circle(Canvas* canvas, int cx, int cy, int radius) {
