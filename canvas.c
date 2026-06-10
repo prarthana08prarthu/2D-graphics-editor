@@ -103,7 +103,7 @@ void canvas_modify_object(Canvas* canvas, int index, Object new_obj) {
 
 // List all objects
 void canvas_list_objects(Canvas* canvas) {
-    printf("\n=== Objects on Canvas ===\n");
+    printf("\n=== Objects on Canvas ===");
     if (canvas->object_count == 0) {
         printf("No objects on canvas.\n");
         return;
