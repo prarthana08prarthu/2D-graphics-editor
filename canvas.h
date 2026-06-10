@@ -1,8 +1,8 @@
 #ifndef CANVAS_H
 #define CANVAS_H
 
-#define MAX_WIDTH 50
-#define MAX_HEIGHT 20
+#define MAX_WIDTH 80
+#define MAX_HEIGHT 24
 #define MAX_OBJECTS 100
 
 typedef struct {

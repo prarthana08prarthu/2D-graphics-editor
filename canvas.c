@@ -10,10 +10,10 @@ Canvas* canvas_create(int width, int height) {
     canvas->height = height;
     canvas->object_count = 0;
 
-    // Initialize grid with spaces
+    // Initialize grid with underscores
     for (int i = 0; i < height; i++) {
         for (int j = 0; j < width; j++) {
-            canvas->grid[i][j] = ' ';
+            canvas->grid[i][j] = '_';
         }
     }
 
@@ -24,7 +24,7 @@ Canvas* canvas_create(int width, int height) {
 void canvas_clear(Canvas* canvas) {
     for (int i = 0; i < canvas->height; i++) {
         for (int j = 0; j < canvas->width; j++) {
-            canvas->grid[i][j] = ' ';
+            canvas->grid[i][j] = '_';
         }
     }
     canvas->object_count = 0;
@@ -39,40 +39,22 @@ void canvas_draw_pixel(Canvas* canvas, int x, int y, char ch) {
 
 // Display the canvas
 void canvas_display(Canvas* canvas) {
-    system("clear"); // Clear screen (use "cls" on Windows)
-    
-    // Print top border
-    printf("+");
-    for (int i = 0; i < canvas->width; i++) {
-        printf("-");
-    }
-    printf("+\n");
-
-    // Print grid
     for (int i = 0; i < canvas->height; i++) {
-        printf("|");
         for (int j = 0; j < canvas->width; j++) {
             printf("%c", canvas->grid[i][j]);
         }
-        printf("|\n");
+        printf("\n");
     }
-
-    // Print bottom border
-    printf("+");
-    for (int i = 0; i < canvas->width; i++) {
-        printf("-");
-    }
-    printf("+\n");
 }
 
 // Add an object to canvas
 void canvas_add_object(Canvas* canvas, Object obj) {
     if (canvas->object_count < MAX_OBJECTS) {
         canvas->objects[canvas->object_count] = obj;
+        printf("Object added with index %d.\n", canvas->object_count);
         canvas->object_count++;
-        printf("\n✓ Object added successfully!\n");
     } else {
-        printf("\n✗ Canvas is full! Cannot add more objects.\n");
+        printf("Canvas is full! Cannot add more objects.\n");
     }
 }
 
@@ -83,10 +65,10 @@ void canvas_delete_object(Canvas* canvas, int index) {
             canvas->objects[i] = canvas->objects[i + 1];
         }
         canvas->object_count--;
-        printf("\n✓ Object deleted successfully!\n");
+        printf("Object deleted.\n");
         canvas_redraw_all(canvas);
     } else {
-        printf("\n✗ Invalid object index!\n");
+        printf("Invalid object index!\n");
     }
 }
 
@@ -94,32 +76,22 @@ void canvas_delete_object(Canvas* canvas, int index) {
 void canvas_modify_object(Canvas* canvas, int index, Object new_obj) {
     if (index >= 0 && index < canvas->object_count) {
         canvas->objects[index] = new_obj;
-        printf("\n✓ Object modified successfully!\n");
+        printf("Object modified.\n");
         canvas_redraw_all(canvas);
     } else {
-        printf("\n✗ Invalid object index!\n");
+        printf("Invalid object index!\n");
     }
 }
 
 // List all objects
 void canvas_list_objects(Canvas* canvas) {
-    printf("\n=== Objects on Canvas ===");
     if (canvas->object_count == 0) {
         printf("No objects on canvas.\n");
         return;
     }
 
     for (int i = 0; i < canvas->object_count; i++) {
-        printf("\nObject %d:\n", i);
-        printf("  Type: ");
-        switch (canvas->objects[i].type) {
-            case 'L': printf("Line\n"); break;
-            case 'C': printf("Circle\n"); break;
-            case 'R': printf("Rectangle\n"); break;
-            case 'T': printf("Triangle\n"); break;
-            default: printf("Unknown\n");
-        }
-        printf("  Position: (%d, %d)\n", canvas->objects[i].x, canvas->objects[i].y);
+        printf("Object %d: Type %c at (%d, %d)\n", i, canvas->objects[i].type, canvas->objects[i].x, canvas->objects[i].y);
     }
 }
 
@@ -128,10 +100,9 @@ void canvas_redraw_all(Canvas* canvas) {
     // Clear grid
     for (int i = 0; i < canvas->height; i++) {
         for (int j = 0; j < canvas->width; j++) {
-            canvas->grid[i][j] = ' ';
+            canvas->grid[i][j] = '_';
         }
     }
-
     // Redraw all objects (will be done by main.c)
 }
 

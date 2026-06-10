@@ -4,156 +4,128 @@
 #include "graphics.h"
 
 void display_menu() {
-    printf("\n");
-    printf("╔════════════════════════════════════════╗\n");
-    printf("║     2D GRAPHICS EDITOR - MAIN MENU     ║\n");
-    printf("╚════════════════════════════════════════╝\n");
-    printf("1. Draw Line\n");
-    printf("2. Draw Circle\n");
-    printf("3. Draw Rectangle\n");
-    printf("4. Draw Triangle\n");
-    printf("5. Display Canvas\n");
-    printf("6. List Objects\n");
-    printf("7. Delete Object\n");
-    printf("8. Clear Canvas\n");
-    printf("9. Exit\n");
-    printf("─────────────────────────────────────────\n");
-    printf("Enter your choice (1-9): ");
+    printf("\n2D Graphics Editor\n");
+    printf("Canvas size: 80 x 24\n");
+    printf("1. Add object\n");
+    printf("2. Delete object\n");
+    printf("3. Modify object\n");
+    printf("4. Display picture\n");
+    printf("5. List objects\n");
+    printf("0. Exit\n");
+    printf("Enter choice: ");
 }
 
 int main() {
-    Canvas* canvas = canvas_create(50, 20);
+    Canvas* canvas = canvas_create(80, 24);
     int choice;
-    int x1, y1, x2, y2, x3, y3, radius, width, height;
+    int shape_type, x1, y1, x2, y2, x3, y3, radius;
     int obj_index;
-
-    printf("\n");
-    printf("╔════════════════════════════════════════╗\n");
-    printf("║   Welcome to 2D Graphics Editor!       ║\n");
-    printf("║   Canvas Size: 50 x 20                 ║\n");
-    printf("╚════════════════════════════════════════╝\n");
 
     while (1) {
         display_menu();
         scanf("%d", &choice);
 
         switch (choice) {
-            case 1: // Draw Line
-                printf("\n--- Draw Line ---\n");
-                printf("Enter first point (x1 y1): ");
-                scanf("%d %d", &x1, &y1);
-                printf("Enter second point (x2 y2): ");
-                scanf("%d %d", &x2, &y2);
+            case 1: // Add object
+                printf("\nChoose shape type:\n");
+                printf("1. Line\n");
+                printf("2. Rectangle\n");
+                printf("3. Circle\n");
+                printf("4. Triangle\n");
+                printf("Enter shape type: ");
+                scanf("%d", &shape_type);
 
-                draw_line(canvas, x1, y1, x2, y2);
+                switch (shape_type) {
+                    case 1: // Line
+                        printf("Enter x1 y1 x2 y2: ");
+                        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+                        draw_line(canvas, x1, y1, x2, y2);
+                        
+                        Object line_obj;
+                        line_obj.type = 'L';
+                        line_obj.x = x1;
+                        line_obj.y = y1;
+                        line_obj.x2 = x2;
+                        line_obj.y2 = y2;
+                        canvas_add_object(canvas, line_obj);
+                        break;
 
-                Object line_obj;
-                line_obj.type = 'L';
-                line_obj.x = x1;
-                line_obj.y = y1;
-                line_obj.x2 = x2;
-                line_obj.y2 = y2;
-                canvas_add_object(canvas, line_obj);
+                    case 2: // Rectangle
+                        printf("Enter top-left x y and bottom-right x y: ");
+                        scanf("%d %d %d %d", &x1, &y1, &x2, &y2);
+                        draw_rectangle(canvas, x1, y1, x2 - x1, y2 - y1);
+                        
+                        Object rect_obj;
+                        rect_obj.type = 'R';
+                        rect_obj.x = x1;
+                        rect_obj.y = y1;
+                        rect_obj.x2 = x2;
+                        rect_obj.y2 = y2;
+                        canvas_add_object(canvas, rect_obj);
+                        break;
 
-                printf("\n✓ Line drawn from (%d, %d) to (%d, %d)\n", x1, y1, x2, y2);
+                    case 3: // Circle
+                        printf("Enter center x y and radius: ");
+                        scanf("%d %d %d", &x1, &y1, &radius);
+                        draw_circle(canvas, x1, y1, radius);
+                        
+                        Object circle_obj;
+                        circle_obj.type = 'C';
+                        circle_obj.x = x1;
+                        circle_obj.y = y1;
+                        circle_obj.size = radius;
+                        canvas_add_object(canvas, circle_obj);
+                        break;
+
+                    case 4: // Triangle
+                        printf("Enter x1 y1 x2 y2 x3 y3: ");
+                        scanf("%d %d %d %d %d %d", &x1, &y1, &x2, &y2, &x3, &y3);
+                        draw_triangle(canvas, x1, y1, x2, y2, x3, y3);
+                        
+                        Object tri_obj;
+                        tri_obj.type = 'T';
+                        tri_obj.x = x1;
+                        tri_obj.y = y1;
+                        tri_obj.x2 = x2;
+                        tri_obj.y2 = y2;
+                        canvas_add_object(canvas, tri_obj);
+                        break;
+
+                    default:
+                        printf("Invalid shape type!\n");
+                }
                 break;
 
-            case 2: // Draw Circle
-                printf("\n--- Draw Circle ---\n");
-                printf("Enter center point (x y): ");
-                scanf("%d %d", &x1, &y1);
-                printf("Enter radius: ");
-                scanf("%d", &radius);
-
-                draw_circle(canvas, x1, y1, radius);
-
-                Object circle_obj;
-                circle_obj.type = 'C';
-                circle_obj.x = x1;
-                circle_obj.y = y1;
-                circle_obj.size = radius;
-                canvas_add_object(canvas, circle_obj);
-
-                printf("\n✓ Circle drawn at (%d, %d) with radius %d\n", x1, y1, radius);
-                break;
-
-            case 3: // Draw Rectangle
-                printf("\n--- Draw Rectangle ---\n");
-                printf("Enter top-left corner (x y): ");
-                scanf("%d %d", &x1, &y1);
-                printf("Enter width: ");
-                scanf("%d", &width);
-                printf("Enter height: ");
-                scanf("%d", &height);
-
-                draw_rectangle(canvas, x1, y1, width, height);
-
-                Object rect_obj;
-                rect_obj.type = 'R';
-                rect_obj.x = x1;
-                rect_obj.y = y1;
-                rect_obj.width = width;
-                rect_obj.height = height;
-                canvas_add_object(canvas, rect_obj);
-
-                printf("\n✓ Rectangle drawn at (%d, %d) with size %d x %d\n", x1, y1, width, height);
-                break;
-
-            case 4: // Draw Triangle
-                printf("\n--- Draw Triangle ---\n");
-                printf("Enter first vertex (x1 y1): ");
-                scanf("%d %d", &x1, &y1);
-                printf("Enter second vertex (x2 y2): ");
-                scanf("%d %d", &x2, &y2);
-                printf("Enter third vertex (x3 y3): ");
-                scanf("%d %d", &x3, &y3);
-
-                draw_triangle(canvas, x1, y1, x2, y2, x3, y3);
-
-                Object tri_obj;
-                tri_obj.type = 'T';
-                tri_obj.x = x1;
-                tri_obj.y = y1;
-                tri_obj.x2 = x2;
-                tri_obj.y2 = y2;
-                canvas_add_object(canvas, tri_obj);
-
-                printf("\n✓ Triangle drawn with vertices (%d, %d), (%d, %d), (%d, %d)\n", 
-                       x1, y1, x2, y2, x3, y3);
-                break;
-
-            case 5: // Display Canvas
-                printf("\n--- Canvas Display ---\n");
-                canvas_display(canvas);
-                break;
-
-            case 6: // List Objects
-                printf("\n--- Objects Listing ---\n");
-                canvas_list_objects(canvas);
-                break;
-
-            case 7: // Delete Object
-                printf("\n--- Delete Object ---\n");
-                canvas_list_objects(canvas);
-                printf("\nEnter object index to delete (0-%d): ", canvas->object_count - 1);
+            case 2: // Delete object
+                printf("\nEnter object index to delete: ");
                 scanf("%d", &obj_index);
                 canvas_delete_object(canvas, obj_index);
                 break;
 
-            case 8: // Clear Canvas
-                printf("\nClearing canvas...\n");
-                canvas_clear(canvas);
-                printf("✓ Canvas cleared!\n");
+            case 3: // Modify object
+                printf("\nEnter object index to modify: ");
+                scanf("%d", &obj_index);
+                // Modify functionality can be added here
                 break;
 
-            case 9: // Exit
-                printf("\nThank you for using 2D Graphics Editor!\n");
-                printf("Goodbye! 👋\n\n");
+            case 4: // Display picture
+                printf("\n");
+                canvas_display(canvas);
+                break;
+
+            case 5: // List objects
+                printf("\nObjects on canvas:\n");
+                canvas_list_objects(canvas);
+                break;
+
+            case 0: // Exit
+                printf("Goodbye.\n");
                 canvas_free(canvas);
                 exit(0);
+                break;
 
             default:
-                printf("\n✗ Invalid choice! Please try again.\n");
+                printf("Invalid choice!\n");
         }
     }
 
