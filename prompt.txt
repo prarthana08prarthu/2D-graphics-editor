@@ -1,8 +1,6 @@
 Project Title: 2D Graphics Editor
 
 Course: Computer Science and Engineering
-Semester: [Fill in your semester, e.g., 4th Semester]
-Institution: REVA University
 
 Objective:
 To design and implement a simple ASCII-based 2D graphics editor in C programming language. 
