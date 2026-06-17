@@ -1,0 +1,38 @@
+Project Title: 2D Graphics Editor
+
+Course: Computer Science and Engineering
+Semester: [Fill in your semester, e.g., 4th Semester]
+Institution: REVA University
+
+Objective:
+To design and implement a simple ASCII-based 2D graphics editor in C programming language. 
+The editor enables users to create, edit, and manipulate basic shapes such as lines, rectangles, and circles 
+within a text-based interface.
+
+Features:
+- Add, edit, and delete objects (shapes).
+- Display objects on a grid using ASCII characters.
+- Save and load drawings from files.
+- Provide a menu-driven interface for user interaction.
+
+Hardware/Software Requirements:
+- Hardware: Standard PC/Laptop
+- Software: GCC Compiler / Code::Blocks / Visual Studio Code
+- Operating System: Windows/Linux
+
+Learning Outcomes:
+- Understanding of dynamic memory allocation in C.
+- Implementation of data structures for object management.
+- Practice with file handling and persistence.
+- Development of modular programming skills.
+
+Usage Instructions:
+1. Compile the source code using GCC or any C compiler.
+2. Run the executable to launch the editor.
+3. Use the menu options to add, edit, and manage shapes.
+4. Save your work to a file for later use.
+
+Submitted By:
+Name: Prarthana HS
+USN: R25EF194
+Institution: REVA University
